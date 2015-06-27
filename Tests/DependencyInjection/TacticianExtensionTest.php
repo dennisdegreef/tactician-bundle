@@ -20,7 +20,7 @@ class TacticianExtensionTest extends AbstractExtensionTestCase
     protected function getContainerExtensions()
     {
         return [
-            new TacticianExtension()
+            new TacticianExtension('tactician')
         ];
     }
 

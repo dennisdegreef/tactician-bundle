@@ -16,7 +16,7 @@ class ConfigurationTest extends AbstractConfigurationTestCase
      */
     protected function getConfiguration()
     {
-        return new Configuration();
+        return new Configuration('tactician');
     }
 
     public function testBlankConfiguration()

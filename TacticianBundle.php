@@ -1,12 +1,13 @@
 <?php namespace League\Tactician\Bundle;
 
+use League\Tactician\Bundle\BundlePlugin\BundleWithPlugins;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use League\Tactician\Bundle\DependencyInjection\Compiler\CommandHandlerPass;
 use League\Tactician\Bundle\DependencyInjection\Compiler\DoctrineMiddlewarePass;
 use League\Tactician\Bundle\DependencyInjection\TacticianExtension;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-class TacticianBundle extends Bundle
+class TacticianBundle extends BundleWithPlugins
 {
     public function build(ContainerBuilder $container)
     {
@@ -17,6 +18,14 @@ class TacticianBundle extends Bundle
 
     public function getContainerExtension()
     {
-        return new TacticianExtension();
+        return new TacticianExtension($this->getAlias());
+    }
+
+    /**
+     * @return string
+     */
+    protected function getAlias()
+    {
+        return 'tactician';
     }
 }

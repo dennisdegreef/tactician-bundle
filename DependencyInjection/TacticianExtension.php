@@ -1,5 +1,6 @@
 <?php namespace League\Tactician\Bundle\DependencyInjection;
 
+use League\Tactician\Bundle\BundlePlugin\ExtensionWithPlugins;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Loader;
@@ -7,7 +8,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\HttpKernel\DependencyInjection\ConfigurableExtension;
 
-class TacticianExtension extends ConfigurableExtension
+class TacticianExtension extends ExtensionWithPlugins
 {
     /**
      * Configures the passed container according to the merged configuration.
@@ -24,9 +25,23 @@ class TacticianExtension extends ConfigurableExtension
         $this->injectMethodNameInflector($mergedConfig, $container);
     }
 
+    /**
+     * @return string
+     */
     public function getAlias()
     {
         return 'tactician';
+    }
+
+    /**
+     * @param array            $config
+     * @param ContainerBuilder $container
+     *
+     * @return Configuration
+     */
+    public function getConfiguration(array $config, ContainerBuilder $container)
+    {
+        return new Configuration($this->getAlias(), $this->getPlugins());
     }
 
     /**

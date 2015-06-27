@@ -1,5 +1,6 @@
 <?php namespace League\Tactician\Bundle\DependencyInjection;
 
+use League\Tactician\Bundle\BundlePlugin\ConfigurationWithPlugins;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
@@ -9,7 +10,7 @@ use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
  *
  * To learn more see {@link http://symfony.com/doc/current/cookbook/bundles/extension.html#cookbook-bundles-extension-config-class}
  */
-class Configuration implements ConfigurationInterface
+class Configuration extends ConfigurationWithPlugins implements ConfigurationInterface
 {
     /**
      * Create a rootnode tree for configuration that can be injected into the DI container
